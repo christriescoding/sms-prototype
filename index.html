@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMS Prototype</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #F4F3EC;
+      color: #1a1a1a;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .article-body {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    p {
+      margin-bottom: 1.5em;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── SMS Component ── */
+    .sms-component {
+      margin: 48px auto;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .sms-timestamp {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .sms-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    /* A row wraps avatar + bubble */
+    .sms-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .sms-row.right {
+      flex-direction: row-reverse;
+    }
+
+    /* Avatar circle */
+    .sms-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #c8c4b4;
+      color: #1a1a1a;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Source Sans 3', sans-serif;
+    }
+
+    .sms-avatar.hidden {
+      visibility: hidden;
+    }
+
+    .sms-row.right .sms-avatar {
+      background: #1b8cff;
+      color: #fff;
+    }
+
+    /* Bubble */
+    .sms-bubble {
+      max-width: 72%;
+      padding: 9px 14px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.45;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 400;
+      opacity: 0;
+      transform: translateY(6px) scale(0.97);
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .sms-bubble.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Left bubble */
+    .sms-row.left .sms-bubble {
+      background: #e4e2d8;
+      color: #1a1a1a;
+      border-bottom-left-radius: 5px;
+    }
+
+    /* Right bubble */
+    .sms-row.right .sms-bubble {
+      background: #1b8cff;
+      color: #fff;
+      border-bottom-right-radius: 5px;
+    }
+
+    /* Consecutive same-side bubbles: flatten inner corners */
+    .sms-row.left + .sms-row.left .sms-bubble {
+      border-top-left-radius: 5px;
+    }
+    .sms-row.right + .sms-row.right .sms-bubble {
+      border-top-right-radius: 5px;
+    }
+
+    /* Spacer between sender groups */
+    .sms-row.left + .sms-row.right,
+    .sms-row.right + .sms-row.left {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="article-body">
+
+    <p>According to prosecutors, the smuggling network chiefly sourced its cocaine from laboratories in neighboring Colombia, the world's top grower of the coca plant, whose leaves are crushed up and purified through various chemical processes in order to extract the powdery drug.</p>
+
+    <p>The Sky chats show Gjika took the lead in negotiating deals to ensure a steady stream of the narcotic, brokering contracts for multiple tonnes to be delivered on a monthly basis — a notable amount given that, at the time, cocaine seizures in Ecuador rarely topped one tonne.</p>
+
+    <p>"Friend my cousin told me you have good things," he wrote to an apparent supplier in January 2021.</p>
+
+    <p>"I'm interested but what makes me a little scared is that I don't know the people, I know you and you seem to be very serious and a kid who has his feet on the ground," he added.</p>
+
+    <p>The supplier told Gjika he was managing two "kitchens" — a slang term for the labs where cocaine is extracted from coca leaves — and asked for the Albanian's trust to accept his business.</p>
+
+    <!-- First SMS set -->
+    <div class="sms-component">
+      <div class="sms-timestamp">January 18, 2021 · 14:32</div>
+      <div class="sms-messages">
+
+        <div class="sms-row left">
+          <div class="sms-avatar">S</div>
+          <div class="sms-bubble">How many exactly do you want?</div>
+        </div>
+
+        <div class="sms-row right">
+          <div class="sms-avatar hidden">G</div>
+          <div class="sms-bubble">2t [tonnes]</div>
+        </div>
+
+        <div class="sms-row right">
+          <div class="sms-avatar hidden">G</div>
+          <div class="sms-bubble">Monthly</div>
+        </div>
+
+        <div class="sms-row right">
+          <div class="sms-avatar">G</div>
+          <div class="sms-bubble">Minimum</div>
+        </div>
+
+        <div class="sms-row left">
+          <div class="sms-avatar hidden">S</div>
+          <div class="sms-bubble">Let me check, I am speaking right now directly with the kitchen</div>
+        </div>
+
+        <div class="sms-timestamp" style="padding-top: 10px;">January 18, 2021 · 15:05</div>
+
+        <div class="sms-row left">
+          <div class="sms-avatar hidden">S</div>
+          <div class="sms-bubble">I will confirm the days</div>
+        </div>
+
+        <div class="sms-row left">
+          <div class="sms-avatar">S</div>
+          <div class="sms-bubble">But I don't think more than 20 days</div>
+        </div>
+
+      </div>
+    </div>
+
+    <p>In another conversation, Gjika described a contract for a "minimum" of "6 T" with another apparent supplier in Colombia who said he had five so-called kitchens at his disposal.</p>
+
+    <!-- Second SMS set -->
+    <div class="sms-component">
+      <div class="sms-timestamp">January 31, 2021 · 12:16</div>
+      <div class="sms-messages">
+
+        <div class="sms-row right">
+          <div class="sms-avatar">G</div>
+          <div class="sms-bubble">Actually I was given a contract for 6 t minimum</div>
+        </div>
+
+        <div class="sms-row left">
+          <div class="sms-avatar">S</div>
+          <div class="sms-bubble">I can do these 6 T without problems I just need money in advance</div>
+        </div>
+
+      </div>
+    </div>
+
+    <p>Yet, sometimes, the plan goes awry.</p>
+
+    <p>The following day, on February 1, 2021, five men were arrested in the Ecuadorian province of Los Ríos with half a tonne of cocaine found inside of their cargo truck, cut into 1-kilo packages branded with the logo UNICO.</p>
+
+  </div>
+
+  <script>
+    // Fire only when the component enters the central third of the viewport.
+    // rootMargin clips the top and bottom ~33% of the viewport so the
+    // observer intersection zone is the middle band of the screen.
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const component = entry.target.closest('.sms-component');
+          const componentBubbles = component.querySelectorAll('.sms-bubble');
+          componentBubbles.forEach((bubble, i) => {
+            setTimeout(() => {
+              bubble.classList.add('visible');
+            }, i * 380);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '-33% 0px -33% 0px',
+      threshold: 0
+    });
+
+    document.querySelectorAll('.sms-component').forEach(component => {
+      const firstBubble = component.querySelector('.sms-bubble');
+      if (firstBubble) observer.observe(firstBubble);
+    });
+  </script>
+</body>
+</html>
