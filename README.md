@@ -1,2 +1,4 @@
-# sms-prototype
-Showcasing updated design for sms component. 
+# SMS Prototype
+Showcasing updated behaviour for documents component.
+
+View here: https://christriescoding.github.io/sms-prototype
